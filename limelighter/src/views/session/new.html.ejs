@@ -1,0 +1,9 @@
+<div class="center">
+  <h1>Login</h1>
+</div>
+
+<% if (locals.notice) { %>
+  <div id="failed-request" className="notice"><%= notice %></div>
+<% } %>
+
+<div id="login-form" createSessionPath="<%= createSessionPath %>" newUserPath="<%= newUserPath %>" email="<%= email %>" ></div>

@@ -1,0 +1,71 @@
+<div class="buttons">
+  <a href="/"><button>Back to Discover</button></a>
+</div>
+
+<hr />
+
+<div class="center">
+  <% if (user) { %>
+    <h1>Your Applications</h1>
+  <% } else { %>
+    <h1>Applications</h1>
+  <% } %>
+</div>
+
+<% if (!postulationsList.length) { %>
+  <div class="center">
+    <p>No results</p>
+  </div>
+<% } else { %>
+    <% postulationsList.forEach((postulation, index) => { %>
+    <div class="postulationIndexRow">
+      <div class="postulationLeft">
+        <div id="title"><%= postulatedTitleList[index] %></div>
+        <div class="postulationContent">
+          <div class="postulationContentRow">
+            <div class="rowLabel">
+              Description:
+            </div>
+            <div class="rowContent">
+              <%= postulation.description %>
+            </div>
+          </div>
+          <div class="postulationContentRow">
+            <div class="rowLabel">
+              Status:
+            </div>
+            <div class="rowContent">
+              <%= postulation.status %>
+            </div>
+          </div>
+          <div class="postulationContentRow">
+            <div class="rowLabel">
+              Date:
+            </div>
+            <div class="rowContent">
+              <%= postulation.date.toLocaleDateString() %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="postulationOptions">
+        <div class="options">
+          <% if (user && user.id === postulation.userId ) { %>
+            <form action="<%= deletePostulationPath(postulation) %>" method="POST">
+              <input type="hidden" name="_method" value="delete" />
+              <input class="deleteBtn listBtn" type="submit" value="Delete" />
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  <% })%>
+<% } %>
+
+<% if (currentUser) { %>
+  <div class="tips" user="<%= JSON.stringify(currentUser) %>" show="true" >
+    <p class="tips-title">Tips:</p>
+    <p class="tips-content">If you delete an application before it's accepted/rejected, you can apply again to that same resource!</p>
+    <p class="tips-close">[close]</p>
+  </div>
+<% } %>

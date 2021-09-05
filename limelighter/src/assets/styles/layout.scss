@@ -1,0 +1,158 @@
+$primaryColor : rgb(77, 189, 55);
+$secondaryColor : rgb(46, 117, 31);
+$textColor: black;
+$palette2: #003249;
+$palette1: #0f4c75;
+$palette3: #007EA7;
+$palette4: #dae1e7;
+$sidebarFontSize : 16px;
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $palette4;
+  font-family: Helvetica, Arial, sans-serif;
+  h1{
+    margin: 0;
+    padding-bottom: 20px;
+    color: $palette2;
+  }
+}
+
+.layoutTitle {
+  color: $palette3;
+  text-shadow: -1px 0 $palette2, 0 1px $palette2, 1px 0 $palette2, 0 -1px $palette2;
+}
+
+
+.center {
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#container {
+  background-color: $palette2;
+  border: 1px solid #BAC0E4;
+  margin: 20px auto;
+  max-width: 800px;
+  min-width: 600px;
+
+  padding: 40px;
+}
+
+#log-out {
+  text-align: center;
+  background-color: $palette3;
+  border: none;
+  color: rgba(230, 230, 230, .9);
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover{
+    background-color: $palette2;
+  }
+  width: 100%;
+  height: 100%;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
+  transition: 0.2s;
+  font-size: $sidebarFontSize;
+}
+
+#log-in {
+  background-color: $palette3;
+  justify-content: center;
+}
+
+#sidebar {
+  position: fixed;
+  width: 15%;
+  height: 100%;
+  background: $palette2;
+  font-size: $sidebarFontSize;
+  box-shadow: 5px 0px 18px #00000070;
+}
+
+#sidebar h2 {
+  text-align: center;
+  color: white;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
+}
+
+#sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#sidebar .icon {
+  margin-right: 5px;
+}
+
+.userImgIcon {
+  background-color: $palette4;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+#sidebar ul a li {
+  display: flex;
+  align-items: center;
+  color: rgba(230, 230, 230, .9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
+  text-align: center;
+  &:hover {
+    background-color: $palette1;
+    cursor: pointer;
+  }
+  transition: all 0.2s;
+}
+
+
+#content {
+  position: absolute;
+  top: 20px;
+  left: 15%;
+  width: 85%;
+  height: 100%;
+}
+
+
+li#musicianNav {
+  display: flex;
+  justify-content: center;
+  color: rgba(230, 230, 230, .9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
+  text-align: center;
+  background-color: purple;
+  .left-icon {
+    margin-right: 5px;
+  }
+  .right-icon {
+    margin-left: 5px;
+  }
+}
+
+.musician {
+  #sidebar {
+    background: #2b1c5e;
+  }
+}

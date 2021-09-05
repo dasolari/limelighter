@@ -1,0 +1,21 @@
+<div class="center">
+    <h2>Conversation with<%= ` ${user.first_name} ${user.last_name}` %></h2>
+</div>
+
+<div 
+    id="message-container" 
+    user="<%= JSON.stringify(chatUser) %>"
+    previousMessages="<%= messages %>"
+    submitPath="<%= newMessagePath %>"
+    type="user-chat">
+</div>
+<form id="send-container">
+    <input type="text" name="content" id="message-input" required>
+    <input type="hidden" name="userName" value="<%= chatUser.name %>">
+    <input type="hidden" name="userId" value="<%= chatUser.id %>">
+    <input type="hidden" name="chatId" value="<%= chatUser.chatId %>">
+    <input type="submit" name="create" value="Send" id="send-button" />
+</form>
+<div id="go-back-container" class="buttons">
+    <button type="button">Save Chat and Leave</button>
+</div>

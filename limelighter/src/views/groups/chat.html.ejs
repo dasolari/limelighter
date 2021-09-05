@@ -1,0 +1,21 @@
+<div class="center">
+    <h2><%= group.name %> Chat</h2>
+</div>
+
+<div 
+    id="message-container" 
+    user="<%= strUser %>"
+    previousMessages="<%= messages %>"
+    submitPath="<%= newMessagePath %>"
+    type="group-chat">
+</div>
+<form id="send-container">
+    <input type="text" name="content" id="message-input" required>
+    <input type="hidden" name="userName" value="<%= chatUser.name %>">
+    <input type="hidden" name="userId" value="<%= chatUser.id %>">
+    <input type="hidden" name="groupId" value="<%= chatUser.groupId %>">
+    <input type="submit" name="create" value="Send" id="send-button" />
+</form>
+<div id="go-back-container" class="buttons">
+    <button type="button">Save Chat and Leave</button>
+</div>

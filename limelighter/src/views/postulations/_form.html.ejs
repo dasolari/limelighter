@@ -1,0 +1,24 @@
+<div>
+  <form id="createForm" action="<%= submitPostulationPath %>" method="post">
+    <% if (!postulation.isNewRecord) { %>
+      <input type="hidden" name="_method" value="patch" />
+    <% } %>
+    <div  class="field">
+      <label for="description">Description</label>
+      <textarea type="text" name="description"><%= postulation.description %></textarea>
+    </div>
+    <div  class="field">
+      <input type="hidden" name="status" value="<%= 'Pending' %>" />
+    </div>
+    <div  class="field">
+      <input type="hidden" name="date" value="<%= Date(Date.now()) %>" />
+    </div>
+    <div  class="field">
+      <% if (postulation.isNewRecord) { %>
+        <input type="submit" name="create" value="Create" />
+      <% } else { %>
+        <input type="submit" name="update" value="Update" />
+      <% } %>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,112 @@
+
+<div class="center">
+  <h2>Announcement</h2>
+</div>
+<hr />
+
+<div class="show">
+  <div id="information">
+    <div class="elem">
+      <div class="info" id="title"><%= announcement.title %></div>
+    </div>
+    <div class="elem">
+      <div class="lbl">Author:</div>
+      <div class="info"><a href="/users/<%= user.id %>"><%= user.first_name + ' ' + user.last_name %></a></div>
+    </div>
+    <div class="elem">
+      <div class="lbl">Description:</div>
+      <div class="info"><%= announcement.description %></div>
+    </div>
+    <div class="elem">
+      <div class="lbl">Created at:</div>
+      <div class="info"><%= announcement.date.toLocaleString() %></div>
+    </div>
+  </div>
+
+
+<% if (currentUser) { %>
+  <% if (currentUser.id === announcement.userId) { %>
+    <div id="buttonsInShow">
+      <a href="<%= editAnnouncementPath(announcement) %>"><button class="btnShow">Edit</button></a>
+      <form action="<%= deleteAnnouncementPath(announcement) %>" method="POST">
+        <input type="hidden" name="_method" value="delete" />
+        <input class="btnShow" type="submit" value="Delete" />
+      </form>
+    </div>
+  <% } %>
+<% } %>
+</div>
+
+<% if (userannouncement && !userannouncement.rated) { %>
+  <div id="rate-announcement" ratingPath="<%= rateAnnouncementPath() %>" userannouncement="<%= JSON.stringify(userannouncement) %>"></div>
+<% } %>
+
+<div class="buttons">
+  <% if (currentUser) { %>
+    <% if (currentUser.id !== announcement.userId) { %>
+      <a href="<%= newPostulationPath() %>"><button>Apply to this Announcement</button></a>
+    <% } %>
+  <% } %>
+</div>
+
+<div class="center"><h2>Applications to this Announcement</h2></div>
+
+<% if (!postulationsList.length) { %>
+  <div class="center">
+    <p>There are no applications to this announcement yet!</p>
+  </div>
+<% } else { %>
+  <% postulationsList.forEach((postulation, index) => { %>
+    <div class="postulationRow">
+      <div class="postulationLeft">
+        <a class="profile" href="/users/<%= postulants[index].id %>" id="title"><%= postulants[index].first_name + ' ' + postulants[index].last_name %></a>
+        <div class="postulationContent">
+          <div class="postulationContentRow">
+            <div class="rowLabel">
+              Status
+            </div>
+            <div class="rowContent">
+              <%= postulation.status %>
+            </div>
+          </div>
+          <% if (currentUser && currentUser.id === announcement.userId) { %>
+            <div class="postulationContentRow">
+              <div class="rowLabel">
+                Description
+              </div>
+              <div class="rowContent">
+                <%= postulation.description %>
+              </div>
+            </div>
+          <% } %>
+          <div class="postulationContentRow">
+            <div class="rowLabel">
+              Date
+            </div>
+            <div class="rowContent">
+              <%= postulation.date.toLocaleDateString() %>
+            </div>
+          </div>
+        </div>
+        <div class="postulationOptions">
+          <div class="options">
+            <% if (currentUser && currentUser.id === postulation.userId) { %>
+              <form action="<%= deletePostulationPath(postulation) %>" method="POST">
+                <input type="hidden" name="_method" value="delete" />
+                <input class="deleteBtn listBtn" type="submit" value="Delete" />
+              </form>
+            <% } %>
+            <% if (currentUser && currentUser.id === announcement.userId) { %>
+              <a href="<%= acceptPostulationPath(postulation) %>"><button class="btnAccept">Accept</button></a>
+              <a href="<%= rejectPostulationPath(postulation) %>"><button class="btnReject">Reject</button></a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+<% } %>
+
+<div class="buttons">
+  <a href="<%= backToAnnouncementsPath %>"><button>Back to Announcements</button></a>
+</div>

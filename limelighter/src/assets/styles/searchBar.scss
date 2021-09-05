@@ -1,0 +1,22 @@
+.searchBar {
+  display: flex;
+  input[type=text] {
+    float: right;
+    // padding: 6px;
+    border: solid;
+    border-color: $palette1;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 18px #00000070;
+  }
+  select {
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 18px #00000070;
+  }
+}
+
+#searchBtn {
+  display: none;
+}

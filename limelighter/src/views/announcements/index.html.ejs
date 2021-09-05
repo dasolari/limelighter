@@ -1,0 +1,137 @@
+
+<div class="showOptions">
+  <a href="/"><button>Back to Discover</button></a>
+  <form action="<%= searchAnnouncementPath() %>" method="post" class="searchBar">
+    <input name="searched" type="text" placeholder="Search...">
+    <select name="searchCriteria" id="searchCriteria">
+      <option value="title">Title</option>
+      <option value="user">Author</option>
+    </select>
+    <button type="submit" id="searchBtn">Submit</button>
+  </form>
+  <% if (currentUser) { %>
+    <a href="<%= newAnnouncementPath %>"><button>New Announcement</button></a>
+  <% } %>
+</div>
+
+<hr />
+
+<div class="center">
+  <h1>Announcements</h1>
+</div>
+
+<% if (locals.notice) { %>
+  <div id="failed-request" className="notice"><%= notice %></div>
+<% } %>
+
+<% if (!notMyAnnouncements.length) { %>
+  <div class="center">
+    <p>No results</p>
+  </div>
+<% } else { %>
+  <div class="displayedCards">
+    <% notMyAnnouncements.forEach((announcement, authorIndex) => { %>
+      <div class="card">
+        <div class="rowContent" id="title">
+          <%= announcement.title %>
+        </div>
+        <div class="cardContent">
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created by: 
+            </div>
+            <div class="rowContent">
+              <a href="/users/<%= announcement.userId %>"><%= authorList[authorIndex].first_name + ' ' + authorList[authorIndex].last_name%></a>
+            </div>
+          </div>
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created at: 
+            </div>
+            <div class="rowContent">
+              <%= announcement.date.toLocaleDateString() %>
+            </div>
+          </div>
+        </div>
+        <div class="options">
+          <a href="<%= showAnnouncementPath(announcement) %>"><button>Show</button></a>
+          <% if (currentUser && currentUser.musician) { %>
+            <% if (currentUser.id !== announcement.userId) { %>
+              <a href="<%= newPostulationPath(announcement) %>"><button>Apply</button></a>
+            <% } %>
+          <% } %>
+          <% if (currentUser) { %>
+            <% if (currentUser.id === announcement.userId) { %>
+              <a href="<%= editAnnouncementPath(announcement) %>"><button>Edit</button></a>
+              <form action="<%= deleteAnnouncementPath(announcement) %>" method="POST">
+                <input type="hidden" name="_method" value="delete" />
+                <input class="deleteBtn" type="submit" value="Delete" />
+              </form>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+<% } %>
+
+<% if (myAnnouncements.length) { %>
+  <div class="center">
+    <h1>My Announcements</h1>
+  </div>
+<% } %>
+
+<% if (myAnnouncements.length) { %>
+  <div class="displayedCards">
+    <% myAnnouncements.forEach((announcement, authorIndex) => { %>
+      <div class="card">
+        <div class="rowContent" id="title">
+          <%= announcement.title %>
+        </div>
+        <div class="cardContent">
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created by: 
+            </div>
+            <div class="rowContent">
+              <a href="/users/<%= announcement.userId %>"><%= authorList[authorIndex + notMyAnnouncements.length].first_name + ' ' + authorList[authorIndex + notMyAnnouncements.length].last_name%></a>
+            </div>
+          </div>
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created at: 
+            </div>
+            <div class="rowContent">
+              <%= announcement.date.toLocaleDateString() %>
+            </div>
+          </div>
+        </div>
+        <div class="options">
+          <a href="<%= showAnnouncementPath(announcement) %>"><button>Show</button></a>
+          <% if (currentUser && currentUser.musician) { %>
+            <% if (currentUser.id !== announcement.userId) { %>
+              <a href="<%= newPostulationPath(announcement) %>"><button>Apply</button></a>
+            <% } %>
+          <% } %>
+          <% if (currentUser) { %>
+            <% if (currentUser.id === announcement.userId) { %>
+              <a href="<%= editAnnouncementPath(announcement) %>"><button>Edit</button></a>
+              <form action="<%= deleteAnnouncementPath(announcement) %>" method="POST">
+                <input type="hidden" name="_method" value="delete" />
+                <input class="deleteBtn" type="submit" value="Delete" />
+              </form>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+<% } %>
+
+<% if (currentUser) { %>
+  <div class="tips" user="<%= JSON.stringify(currentUser) %>" show="true" >
+    <p class="tips-title">Tips:</p>
+    <p class="tips-content">You can rate a user if he accepts your postulation to one of his announcements.</p>
+    <p class="tips-close">[close]</p>
+  </div>
+<% } %>

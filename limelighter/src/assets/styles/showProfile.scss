@@ -1,0 +1,40 @@
+.showProfile {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: solid;
+  border-color: $palette2;
+  border-width: thin;
+  align-items: center;
+  padding: 10px;
+  #information {
+    .elem {
+      text-align: left;
+      margin: 10px 0px 10px 0px;
+      .lbl {
+        margin: 10px 0px 5px 0px;
+        font-weight: bold;
+        color: black;
+      }
+      .info {
+          margin-left: 10px;
+      }
+      ul {
+        .info {
+          li {
+            margin-left: 10px;
+            text-align: left;
+          }
+        }
+        align-content: left;
+      }
+    }
+  }
+}
+
+#userProfile {
+  width: 80%;
+}
+
+#groupProfile {
+  border-bottom: none;
+}

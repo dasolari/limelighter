@@ -1,0 +1,171 @@
+
+<div class="showOptions">
+  <a href="/"><button>Back to Discover</button></a>
+  <form action="<%= searchGroupPath() %>" method="post" class="searchBar">
+    <input name="searched" type="text" placeholder="Search...">
+    <select name="searchCriteria" id="searchCriteria">
+      <option value="name">Name</option>
+      <option value="leader">Leader</option>
+      <option value="genre">Genre</option>
+      <option value="vacancies">Min. Vacancies</option>
+    </select>
+    <button type="submit" id="searchBtn">Submit</button>
+  </form>
+  <% if (currentUser) { %>
+    <% if (currentUser.musician) { %>
+      <a href="<%= newGroupPath %>"><button>New Group</button></a>
+    <% } %>
+  <% } %>
+</div>
+
+<hr />
+
+<div class="center">
+  <h1>Groups</h1>
+</div>
+
+<% if (locals.notice) { %>
+  <div id="failed-request" className="notice"><%= notice %></div>
+<% } %>
+
+<% if (!notMyGroups.length) { %>
+  <div class="center">
+    <p>No results</p>
+  </div>
+<% } else { %>
+  <div class="displayedCards">
+  <% notMyGroups.forEach((group, index) => { %>
+    <div class="card">
+      <div class="rowContent" id="title">
+        <%= group.name %>
+        <div class="stars-rating-container" rating="<%= group.rating %>" all="<%= group.allratings %>"></div>
+      </div>
+      <div class="cardContent">
+        <div class="cardRow">
+          <div class="rowLabel">
+            Leader: 
+          </div>
+          <div class="rowContent">
+            <a class="profile" href="/users/<%= leaderList[index].id %>"><%= leaderList[index].first_name + ' ' + leaderList[index].last_name %></a>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Genre: 
+          </div>
+          <div class="rowContent">
+            <%= group.genre %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Vacancies: 
+          </div>
+          <div class="rowContent">
+            <%= group.avaincies - occupantsList[index] %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Created at: 
+          </div>
+          <div class="rowContent">
+            <%= group.date.toLocaleDateString() %>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <a href="<%= showGroupPath(group) %>"><button>Show</button></a>
+        <% if (currentUser && currentUser.musician) { %>
+          <% if (currentUser.id !== group.leader_id) { %>
+            <a href="<%= newPostulationPath(group) %>"><button>Apply</button></a>
+          <% } %>
+        <% } %>
+        <% if (currentUser && (currentUser.id === group.leader_id)) { %>
+          <a href="<%= editGroupPath(group) %>"><button>Edit</button></a>
+          <form action="<%= deleteGroupPath(group) %>" method="POST">
+            <input type="hidden" name="_method" value="delete" />
+            <input class="deleteBtn" type="submit" value="Delete" />
+          </form>
+        <% } %>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+<% } %>
+
+<% if (myGroups.length) { %>
+  <div class="center">
+    <h1>My Groups</h1>
+  </div>
+<% } %>
+
+<% if (myGroups.length) { %>
+  <div class="displayedCards">
+  <% myGroups.forEach((group, index) => { %>
+    <div class="card">
+      <div class="rowContent" id="title">
+        <%= group.name %>
+        <div class="stars-rating-container" rating="<%= group.rating %>" all="<%= group.allratings %>"></div>
+      </div>
+      <div class="cardContent">
+        <div class="cardRow">
+          <div class="rowLabel">
+            Leader: 
+          </div>
+          <div class="rowContent">
+            <a class="profile" href="/users/<%= leaderList[index + notMyGroups.length].id %>"><%= leaderList[index + notMyGroups.length].first_name + ' ' + leaderList[index + notMyGroups.length].last_name %></a>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Genre: 
+          </div>
+          <div class="rowContent">
+            <%= group.genre %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Vacancies: 
+          </div>
+          <div class="rowContent">
+            <%= group.avaincies - occupantsList[index + notMyGroups.length] %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Created at: 
+          </div>
+          <div class="rowContent">
+            <%= group.date.toLocaleDateString() %>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <a href="<%= showGroupPath(group) %>"><button>Show</button></a>
+        <% if (currentUser && currentUser.musician) { %>
+          <% if (currentUser.id !== group.leader_id) { %>
+            <a href="<%= newPostulationPath(group) %>"><button>Apply</button></a>
+          <% } %>
+        <% } %>
+        <% if (currentUser && (currentUser.id === group.leader_id)) { %>
+          <a href="<%= editGroupPath(group) %>"><button>Edit</button></a>
+          <form action="<%= deleteGroupPath(group) %>" method="POST">
+            <input type="hidden" name="_method" value="delete" />
+            <input class="deleteBtn" type="submit" value="Delete" />
+          </form>
+        <% } %>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+<% } %>
+
+<% if (currentUser) { %>
+  <div class="tips" user="<%= JSON.stringify(currentUser) %>" show="false">
+    <p class="tips-title">Tips:</p>
+    <p class="tips-content"><%= currentUser.first_name + ', ' %>add an instrument in your <a href="users/<%= currentUser.id %>">profile</a><%= ' ' %>to become a musician!</p>
+    <p class="tips-close">[close]</p>
+  </div>
+<% } %>

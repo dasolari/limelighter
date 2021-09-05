@@ -1,0 +1,139 @@
+<div class="center">
+  <h2><%= isThisUser ? 'Your Profile' : `${user.first_name}'s Profile` %></h2>
+  <% if (isThisUser) { %>
+    <div class="buttonsInShow">
+      <a href="<%= editUserPath() %>"><button>Edit Profile</button></a>
+    </div>
+  <% } %>
+</div>
+
+<hr />
+
+<% if (locals.notice) { %>
+  <% if (notice.includes('error')) { %>
+    <div id="failed-request" className="notice"><%= notice %></div>
+  <% } else { %>
+    <div class="succesful-request" className="notice"><%= notice %></div>
+  <% } %>
+<% } %>
+
+<div class="show">
+  <div class="showProfile">
+    <div>
+      <% if (user.musician) { %>
+        <div class="elem">
+          <div id="musician">Musician</div>
+        </div>
+        <% }%>
+      <div class="elem">
+        <div class="info" id="title"><%= user.first_name + " " + user.last_name %></div>
+        <div class="info"><div class="stars-rating-container" rating="<%= user.rating %>" all="<%= user.allratings %>"></div></div>
+      </div>
+      <% if(user.photo){ %>
+        <img src="<%= user.photo %>" alt="Image" class="userImg">
+      <% } else { %> 
+        <img src="<%= assetPath('default-profile.png') %>" alt="Image" class="userImg">
+      <% }%> 
+    </div>
+    <div id="information">
+      <div class="elem">
+        <div class="lbl">Email:</div>
+        <div class="info"><%= user.email %></div>
+      </div>
+      <div class="elem">
+        <div class="lbl">Country:</div>
+        <div class="info"><%= user.country ? user.country : 'No Country' %></div>
+      </div>
+      <div class="elem">
+        <div class="lbl">City:</div>
+        <div class="info"><%= user.city ? user.city : 'No City' %></div>
+      </div>
+      <div class="elem">
+        <div class="lbl">State/Region/Province:</div>
+        <div class="info"><%= user.state_region_province ? user.state_region_province : 'No State, Region or Province' %></div>
+      </div>
+      <div class="elem">
+        <div class="lbl">Address:</div>
+        <div class="info"><%= user.address ? user.address : 'No Address' %></div>
+      </div>
+      <div class="elem">
+        <div class="lbl">Phone number:</div>
+        <div class="info"><%= user.phone_number ? user.phone_number : 'No Phone Number' %></div>
+      </div>
+    </div>
+  </div>
+  <div class="information">
+    <div class="elem">
+      <div class="lbl">
+        <%= isThisUser ? 'Your instruments:' : 'Instruments this user plays:' %>
+      </div>
+      <div class="info">
+        <% if (user.instruments) { %>
+          <ul>
+          <% user.instruments.forEach((elem) => { %>
+              <li> <%= elem %> </li>
+          <% }) %>
+          </ul>
+      <% } else { %>
+        <%= isThisUser ? 'You are not a musician yet, you can add an instrument below!' : 'This user is not a musician.' %>
+      <% } %>
+      </div>
+    </div>
+    <div class="elem">
+      <div class="lbl">Links:</div>
+      <div class="info">
+        <% if (user.links && user.links.length) { %>
+          <ul>
+          <% user.links.forEach((elem) => { %>
+            <li>
+              <a href="https://<%= JSON.parse(elem).link %>" target="_blank"><%= JSON.parse(elem).linkName %></a>
+              <% if (isThisUser) { %>
+                <a class="remove-instrument-link" href="<%= removeLinkPath(elem) %>">Remove</a>
+              <% } %>
+            </li>
+          <% }) %>
+          </ul>
+        <% } else { %>
+          <%= isThisUser ? 'You have no video links yet, you can add one below!' : 'This user does not have any video links yet.' %>
+        <% } %>
+      </div>
+    </div>
+    <div class="elem">
+      <div class="info">
+        <div class="lbl">Media:</div>
+        <a href="<%= showMediaPath %>"><%= isThisUser ? 'Go to your media' : `Go to ${user.first_name}'s media` %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if (currentUser && currentUser.id !== user.id) { %>
+  <div class="buttons">
+    <a href="<%= goToUserChat() %>"><button class="btnShow">Chat</button></a>
+  </div>
+<% } %>
+
+<% if (isThisUser) { %>
+  <div class="show">
+    <% if (user.instruments) { %>
+      <div class="center">
+        <h4>Add an instrument or a link here</h4>
+      </div>
+    <% } else { %>
+      <div class="center">
+        <h4>Become a musician, add your first instrument here!</h4>
+      </div>
+    <% } %>
+    <div id="buttonsInShow">
+      <div id="user-show" addInstrumentLinkPath="<%= addInstrumentLinkPath() %>"></div>
+    </div>
+  </div>
+<% } %>
+
+<% if (currentUser && currentUser.id === user.id && !currentUser.musician) { %>
+  <div class="tips" user="<%= JSON.stringify(currentUser) %>" show="true" >
+    <p class="tips-title">Tips:</p>
+    <p class="tips-content">Add an instrument below!</p>
+    <p class="tips-close">[close]</p>
+  </div>
+<% } %>

@@ -1,0 +1,73 @@
+<div class="center">
+  <% if (currentUser) { %>
+    <h1>Other Users</h1>
+  <% } else {%>
+    <h1>Users</h1>
+  <% }%>
+</div>
+
+<div class="showOptions">
+  <a href="/"><button>Back to Discover</button></a>
+  <form action="<%= searchUserPath() %>" method="post" class="searchBar">
+    <input name="searched" type="text" placeholder="Search...">
+    <select name="searchCriteria" id="searchCriteria">
+      <option value="name">Name</option>
+      <option value="email">Email</option>
+      <option value="country">Country</option>
+      <option value="city">City</option>
+      <option value="instruments">Instruments</option>
+    </select>
+    <button type="submit" id="searchBtn">Submit</button>
+  </form>
+</div>
+
+<hr />
+
+<% if (locals.notice) { %>
+  <div id="failed-request" className="notice"><%= notice %></div>
+<% } %>
+
+<% if (!users.length) { %>
+  <div class="center">
+    <p>No results</p>
+  </div>
+<% } else { %>
+  <% users.forEach((user) => { %>
+    <div class="userRow">
+      <% if(user.photo){ %>
+        <img src="<%= user.photo %>" alt="Image" class="userImg">
+      <% } else { %> 
+        <img src="<%= assetPath('default-profile.png') %>" alt="Image" class="userImg">
+      <% }%> 
+      <div class="userContent">
+        <a href="<%= showUserPath(user) %>" id="title"><%= user.first_name + ' ' + user.last_name %></a>
+        <div class="userContentRow">
+          <div class="rowLabel">
+            Country:
+          </div>
+          <div class="rowContent">
+            <%= user.country ? user.country : 'No Country' %>
+          </div>
+        </div>
+        <div class="userContentRow">
+          <div class="rowLabel">
+            City:
+          </div>
+          <div class="rowContent">
+            <%= user.city ? user.city : 'No City' %>
+          </div>
+        </div>
+        <% if (user.instruments) { %>
+        <div class="userContentRow">
+          <div class="rowContent" id="musician">
+            Musician
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <div class="options">
+        <a href="<%= showUserPath(user) %>"><button>Show</button></a>
+      </div>
+    </div>
+  <% })%>
+<% }%>

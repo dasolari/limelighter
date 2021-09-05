@@ -1,0 +1,70 @@
+.show-media {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin: 10px auto 15px auto;
+    padding: 5px;
+    width: 90%;
+    height: fit-content;
+    overflow: scroll hidden;
+    background-color: #2f137ce5;
+    border-radius: 5px;
+    box-shadow: 5px 10px 18px #00000070;
+}
+
+.media-title {
+    text-align: center;
+    color: $palette2;
+    margin-top: 5%;
+    &.add {
+        margin-top: 15px;
+    }
+}
+
+.player-wrapper {
+    display: inline-block;
+    width: 60%;
+    text-align: left;
+    h5 {
+        position: relative;
+        margin: 5px 20px;
+        padding: 5px;
+        font-size: large;
+        color: white;
+        background-color: #5f0a87;
+        border-radius: 5px;
+        border: 2px solid black;
+        box-shadow: 5px 10px 18px #00000070;
+        .delete-media {
+            position: absolute;
+            padding: 2px;
+            border-radius: 15px;
+            right: 3px;
+            top: 9%;
+            &:hover {
+                color: white;
+                background-color: darkred;
+            }
+        }
+    }
+    .react-player {
+        padding: 0px 20px 10px 20px;
+    }
+}
+
+.spotify-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    .delete-media {
+        position: absolute;
+        padding: 2px;
+        border-radius: 15px;
+        right: -25px;
+        top: 0;
+        &:hover {
+            color: white;
+            background-color: darkred;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<div>
+    <% if (locals.errors) { %>
+      <div class="errors">
+        You need to fix the following errors:
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.message %></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
+    <form id="createForm" action="<%= submitAnnouncementPath %>" method="post">
+      <% if (!announcement.isNewRecord) { %>
+        <input type="hidden" name="_method" value="patch" />
+      <% } %>
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" name="title" value="<%= announcement.title %>" required/>
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea rows='5' cols='50' type="text" name="description" required><%= announcement.description %></textarea>
+      </div>
+      <div class="field">
+        <input type="hidden" name="date" value="<%= Date(Date.now()) %>" />
+      </div>
+      <!--
+      <div class="field">
+        <input type="hidden" name="userId" value="<%= 0 %>" />
+      </div>
+      <div class="field">
+        <input type="hidden" name="groupId" value="<%= 0 %>" />
+      </div>
+      -->
+      <div  class="field">
+        <% if (announcement.isNewRecord) { %>
+          <input type="submit" name="create" value="Create" />
+        <% } else { %>
+          <input type="submit" name="update" value="Update" />
+        <% } %>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,102 @@
+<div class="center">
+  <h1>Discover</h1>
+</div>
+
+<div class="showOptions">
+  <a href="<%= goToAnnouncementsPath %>"><button>Go to Announcements</button></a>
+  <a href="<%= goToGroupsPath %>"><button>Go to Groups</button></a>
+</div>
+
+<hr />
+
+<div class="center">
+  <h1>Groups</h1>
+</div>
+
+<% if (groupsList.length) { %>
+  <div class="displayedCards">
+  <% groupsList.forEach((group, index) => { %>
+    <div class="card">
+      <div class="rowContent" id="title">
+        <%= group.name %>
+        <div class="stars-rating-container" rating="<%= group.rating %>" all="<%= group.allratings %>"></div>
+      </div>
+      <div class="cardContent">
+        <div class="cardRow">
+          <div class="rowLabel">
+            Leader: 
+          </div>
+          <div class="rowContent">
+            <a class="profile" href="/users/<%= leaderList[index].id %>"><%= leaderList[index].first_name + ' ' + leaderList[index].last_name %></a>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Genre: 
+          </div>
+          <div class="rowContent">
+            <%= group.genre %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Vacancies: 
+          </div>
+          <div class="rowContent">
+            <%= group.avaincies - occupantsList[index] %>
+          </div>
+        </div>
+        <div class="cardRow">
+          <div class="rowLabel">
+            Created at: 
+          </div>
+          <div class="rowContent">
+            <%= group.date.toLocaleDateString() %>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <a href="<%= showGroupPath(group) %>"><button>Show</button></a>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+<% } %>
+
+
+<div class="center">
+  <h1>Announcements</h1>
+</div>
+
+<% if (announcementsList.length) { %>
+  <div class="displayedCards">
+    <% announcementsList.forEach((announcement, authorIndex) => { %>
+      <div class="card">
+        <div class="rowContent" id="title">
+          <%= announcement.title %>
+        </div>
+        <div class="cardContent">
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created by: 
+            </div>
+            <div class="rowContent">
+              <a href="/users/<%= announcement.userId %>"><%= authorList[authorIndex].first_name + ' ' + authorList[authorIndex].last_name%></a>
+            </div>
+          </div>
+          <div class="cardRow">
+            <div class="rowLabel">
+              Created at: 
+            </div>
+            <div class="rowContent">
+              <%= announcement.date.toLocaleDateString() %>
+            </div>
+          </div>
+        </div>
+        <div class="options">
+          <a href="<%= showAnnouncementPath(announcement) %>"><button>Show</button></a>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+<% } %>

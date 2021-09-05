@@ -1,0 +1,62 @@
+#message-container {
+  border: solid $palette2;
+  border-radius: 5px;
+  width: 75%;
+  height: 60%;
+  margin: 10px auto;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: 5px 5px 18px #00000070;
+  div.message {
+      margin: 5px 0;
+      border: 1px solid black;
+      border-radius: 10px;
+      width: fit-content;
+      min-width: 25%;
+      max-width: 45%;
+      p {
+          margin: auto 5px;
+      }
+      p.name {
+        margin-top: 1px;
+        font-weight: bold;
+    }
+      p.content {
+        font-size: medium;
+      }
+      p.datetime {
+        font-weight: lighter;
+        font-size: small;
+        text-align: right;
+      }
+  }
+  div.typer {
+    margin: 5px 2px;
+    font-weight: lighter;
+    font-size: small;
+    font-style: oblique;
+  }
+}
+
+#send-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    width: 75%;
+    #message-input {
+        width: 80%;
+        height: 60%;
+        border-radius: 5px;
+        border: solid $palette2;
+        box-shadow: 5px 10px 18px #00000070;
+    }
+    #send-button {
+        width: 18%;
+        padding: 2px;
+        background-color: lightsteelblue;
+        border: 1px solid black;
+        border-radius: 5px;
+        box-shadow: 5px 10px 18px #00000070;
+    }
+}

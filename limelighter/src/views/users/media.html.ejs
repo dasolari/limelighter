@@ -1,0 +1,52 @@
+<div class="center">
+    <h2><%= isThisUser ? 'Your Media & Recordings' : `${user.first_name}'s Media & Recordings` %></h2>
+</div>
+
+<hr />
+
+<% if (locals.notice) { %>
+  <% if (notice.includes('error')) { %>
+    <div id="failed-request" className="notice"><%= notice.split(':')[1] %></div>
+  <% } else { %>
+    <div class="succesful-request" className="notice"><%= notice %></div>
+  <% } %>
+<% } %>
+
+<% if (!isThisUser && !userVideos.length && !spotifyAlbums.length && !spotifyArtists.length && !spotifyTracks.length) { %>
+  <div class="center"><p>No media yet</p></div>
+<% } %>
+
+<% if (userVideos.length) { %>
+  <h3 class="media-title">Videos</h3>
+  <div class="show-media">
+    <div class="media"
+      video="<%= JSON.stringify(userVideos) %>"
+      isOwner="<%= isThisUser %>"
+      delPath="<%= deleteVideoMediaPath %>">
+    </div>
+  </div>
+<% } %>
+
+<% if (isThisUser) { %>
+  <h4 class="media-title add">Add any type of media here (e.g. Soundcloud, Youtube, Twitch, etc...)</h4>
+  <div class="buttonsInShow">
+    <div id="add-media" addMediaPath="<%= addMediaPath() %>"></div>
+  </div>
+<% } %>
+
+<div class="spotify-media"
+  albums="<%= JSON.stringify(spotifyAlbums) %>"
+  artists="<%= JSON.stringify(spotifyArtists) %>"
+  tracks="<%= JSON.stringify(spotifyTracks) %>"
+  isOwner="<%= isThisUser %>"
+  addPath="<%= addSpotifyMediaPath() %>"
+  delPath="<%= deleteSpotifyMediaPath %>">
+</div>
+
+<% if (currentUser && isThisUser) { %>
+  <div class="tips" user="<%= JSON.stringify(currentUser) %>" show="true">
+    <p class="tips-title">Tips:</p>
+    <p class="tips-content">To get the Spotify URI, in Spotify go to a certain album, artist or track, click the "more" button (three dots) and select "Share".</p>
+    <p class="tips-close">[close]</p>
+  </div>
+<% } %>

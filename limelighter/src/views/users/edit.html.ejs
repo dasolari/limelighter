@@ -1,0 +1,14 @@
+<% if (locals.notice) { %>
+  <div id="failed-request" className="notice"><%= notice %></div>
+<% } %>
+    
+<div id="edit-form" editUserPath="<%= editUserPath %>" user="<%= strUser %>"></div>
+
+<div class="center">
+  <div class="buttonsInShow">
+    <form action="<%= deleteUserPath %>" method="POST">
+      <input type="hidden" name="_method" value="delete" />
+      <input class="deleteAccount" type="submit" value="Delete Account" />
+    </form>
+  </div>
+</div>

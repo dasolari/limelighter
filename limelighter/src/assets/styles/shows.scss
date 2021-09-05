@@ -1,0 +1,197 @@
+.show {
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+    padding: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $palette3;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: auto;
+    box-shadow: 5px 10px 18px #00000070;
+    dl dt {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+    }
+    dl dd {
+        display: block;
+        margin-top: 5px;
+        text-align: center;
+    }
+}
+
+.btnShow {
+    position: relative;
+    background-color: #1b262c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 5px 2px;
+    cursor: pointer;
+    &:hover{
+    background-color: $palette1;
+    }
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    display: block;
+    box-shadow: 5px 10px 18px #00000070;
+    transition: all 0.2s;
+    border-radius: 5px;
+}
+
+.btnAccept {
+    position: relative;
+    background-color: green;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 5px 2px;
+    cursor: pointer;
+    &:hover{
+    background-color: $palette1;
+    }
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    display: block;
+    transition: all 0.2s;
+}
+
+.btnReject {
+    position: relative;
+    background-color: darkred;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 5px 2px;
+    cursor: pointer;
+    &:hover{
+    background-color: $palette1;
+    }
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    display: block;
+    transition: all 0.2s;
+}
+
+#buttonsInShow {
+    position: relative;
+    text-align: center;
+    width: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.buttonsInShow {
+    position: relative;
+    text-align: center;
+    width: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+
+.elem {
+    margin: 10px;
+    text-align: center;
+    .lbl {
+        margin: 5px;
+        font-weight: bold;
+        color: black;
+    }
+    .info {
+        color: white;
+        &.name {
+            font-size: xx-large;
+        }
+        a {
+            text-decoration: underline;
+            color: white;
+        }
+        a.remove-instrument-link {
+            margin: 0 5px;
+            padding: 2px 5px;
+            background-color: rgba(201, 24, 24, 0.795);
+            border-radius: 10px;
+            color: black;
+            text-decoration: none;
+            font-size: smaller;
+            box-shadow: 5px 5px 18px #00000070;
+        }
+        a.remove-instrument-link:hover {
+            background-color: rgba(165, 20, 20, 0.733);;
+        }
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: auto;
+        text-align: center;
+        li {
+            text-align: center;
+            text-decoration: none;
+            margin: 10px;
+        }
+    }
+}
+
+#musician {
+    font-size: 200%;
+    background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 100%);   -webkit-background-clip: text;
+    background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 100%);   -moz-background-clip: text;
+
+    color: transparent;
+}
+
+#musicianContainer {
+    width: 50%;
+    left: 50%;
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+h4 {
+    position: relative;
+    color: $palette1;
+}
+
+.showOptions {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+.deleteAccount {
+    background-color: darkred;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 5px 2px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgb(97, 2, 2);
+    }
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    display: block;
+    transition: all 0.2s;
+    box-shadow: 5px 10px 18px #00000070;
+}
+
+.accept-postulant {
+    margin: 10px;
+}
